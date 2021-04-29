@@ -12,22 +12,25 @@ session_start();
 if(isset($_GET["disconnect"])){
     if($_GET["disconnect"] == "1"){
         unset($_SESSION["user"]);
-        echo "Utilisateur déconnecté !";
+        //echo "Utilisateur déconnecté !";
         $disconnected = true;
     }
 }
 if(isset($_SESSION['user'])){
     //echo '<meta http-equiv="refresh" content="durée;URL=adresse-de-destination">';
-    echo "Bienvenue " . $_SESSION['user'] . " ! ";
-    echo '<a href="?disconnect=1">Se déconnecter !</a><br>';
+    echo "<nav>";
+    echo "Bienvenue " . $_SESSION['user'] . " ! <br>";
+    echo '<a href="?disconnect=1">Se déconnecter !</a>';
 }
 else{
     if($_SERVER["SCRIPT_NAME"] != "/bulb/index.php"){
         if(!$disconnected){
-            echo '<meta http-equiv="refresh" content="1;URL=index.php?err=`Vous n\'êtes pas connecté !`">';
+            header('Location: redirection.php?err=`Vous n\'êtes pas connecté !`');      
+            exit();      
         }
         else{
-            echo '<meta http-equiv="refresh" content="1;URL=index.php?err=`Vous-vous êtes bien déconnecté !`">';
+            header('Location: redirection.php?err=`Vous-vous êtes bien déconnecté !`');      
+            exit();
         }
     }
 }

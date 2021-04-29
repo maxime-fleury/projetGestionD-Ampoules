@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="general.css" rel="stylesheet" type="text/css">
+    <link href="toastbar.css" rel="stylesheet" type="text/css">
     <script src="script.js" charset="utf-8" > </script>
     <title>Historique</title>
 </head>
@@ -15,26 +16,22 @@
    
     require("config.php");
     $nb_elements = 20;//nombre d'elements à afficher
-    echo "<br><a href='client.php'>Retour sur la page de gestion des utilisateur</a>";
+    echo "<a href='client.php'>Gestion des Utilisateurs</a></nav>";
     echo "<h1>Gestion des ampoules</h1>";
-    if(isset($_GET["err"]) && $_GET["err"] != "" ){//si err existe afficher les erreurs
-        if($_GET["err"]!="0");
-            echo $_GET["err"];
-    }   
+//////////////////////////////////////////TOASTBAR SUCCESS
     if(isset($_GET["delete"]) && $_GET["delete"] != "" ){//si err existe afficher les erreurs
         if($_GET["delete"]=="1")
-            echo "<div id='success'>La supprésion s'est déroulée avec success !</div>";
-        else{
-            echo "<div id='err'>Une erreur s'est produite lors de la suppresion !</div>";
-        }
+            echo "<div id='success'>La suppression s'est déroulée avec success !</div>";
     }
     if(isset($_GET["add"]) && $_GET["add"] != "" ){//si err existe afficher les erreurs
         if($_GET["add"]=="1")
             echo "<div id='success'>L'ajout s'est déroulée avec success !</div>";
-        else{
-            echo "<div id='err'>Une erreur s'est produite lors de l'ajout !</div>";
-        }
     }
+    if(isset($_GET["update"]) && $_GET["update"] != "" ){//si err existe afficher les erreurs
+        if($_GET["update"]=="1")
+            echo "<div id='success'>L'ajout s'est déroulée avec success !</div>";
+    }
+//////////////////////////////////////////////////
     if(isset($_GET["page"]) && $_GET["page"] != "" ){//on teste la page dans tout les cas car on peut afficher la page ET faire d'autres actions !!
         try
         {
@@ -43,7 +40,7 @@
         }
         catch (Exception $e)
         {
-                die('Erreur : ' . $e->getMessage());
+
         }
         $page = $_GET["page"];
         $start_from = $page*$nb_elements;//pour afficher $nb_elements element si page = 0 on affiche de 0 ç $nb_elements si page 1 de 30 à 60...
@@ -97,7 +94,7 @@
         $t->closeCursor(); 
         echo "</table>";
         $date = date('Y-m-d');
-        echo "<hr> Ajouter un changement d'ampoule
+        echo "<hr> <h1>Ajouter un changement d'ampoule</h1>
             <table>
             <tr><th scope='col' class='up'>id</th><th scope='col' class='up'>Etage</th><th scope='col' class='up'>Prix</th><th scope='col' class='up'>Position</th><th scope='col' class='up'>date</th><th></th></tr>
             <tr>

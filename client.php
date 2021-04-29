@@ -1,6 +1,3 @@
-<?php
-    require('config.php');
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,16 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="general.css" rel="stylesheet" type="text/css">
     <script src="script.js" charset="utf-8" > </script>
+    <link href="toastbar.css" rel="stylesheet" type="text/css">
     <title>Espace client</title>
 </head>
 <body>
-    <br>
+    <?php
+    require('config.php');
+    ?>
+    <a href="histo.php?page=0">Historique</a></nav>
     <h1>Vous dans dans l'espace de gestion</h1>
-    <a href="histo.php?page=0">Historique</a><br>
     <h3>Liste des utilisateurs</h3>
     <table id="list">
         <tr>
-            <td>Id</td><td>Nom d'utilisateur</td><td>Mot de passe</td><td>Email</td>
+            <th class='up'>Id</th><th class='up'>Nom d'utilisateur</th><th class='up'>Mot de passe</th><th class='up'>Email</th><th class='up'></th><th class='up'></th>
         </tr>
         <?php
             try
@@ -70,13 +70,15 @@
         ?>
     </table>
     <h3>Ajout d'un utilisateur</h3>
+    <table>
     <form action="?" method="GET">
-        <input type="hidden" name="action" value='add'/>
-        <input type="text" placeholder="Utilisateur" value="Utilisateur" name="user"/>
-        <input type="text" placeholder="Mot de passe" name="pass"/>
-        <input type="email" placeholder="admin@gmail.com" name="email"/>
-        <input type="submit" onclick="return confirm('Êtes vous sûr de vouloir créer cette utilisateur ?')"/>
+        <input type="hidden" name="action" value='add'/><tr>
+        <td class='green'><input type="text" placeholder="Utilisateur" value="Utilisateur" name="user"/></td>
+        <td class='green'><input type="text" placeholder="Mot de passe" name="pass"/></td>
+        <td class='green'><input type="email" placeholder="admin@gmail.com" name="email"/></td>
+        <td class='green'><input type="submit" onclick="return confirm('Êtes vous sûr de vouloir créer cette utilisateur ?')"/></td>
+        </tr>
     </form>
-
+   </table>
 </body>
 </html>
