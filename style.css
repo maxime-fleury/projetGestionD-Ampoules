@@ -1,12 +1,14 @@
 :root{
-    --main-bg-color: #222;
-    --main-blue: blue;
-    --main-color: black;
+    --main-bg-color: #a71d31;
+    --main-blue: #f1f0cc;
+    --main-color: #a71d31;
     --err-color: red;
+    --second-bg: #8d775f;
 }
 body{
     background: var(--main-bg-color);
     color: var(--main-color);
+    font-size:24px;
 }
 
 #login_container{
@@ -21,8 +23,10 @@ label{
 }
 input{
     color: var(--main-blue);
-    border:solid 1px var(--main-blue);
-    background-color:var(--main-color);
+    border:solid 1px var(--second-bg);
+    background-color:var(--main-bg-color);
+    width:300px;
+    font-size:24px;
 }
 input[type="submit"]{
     width: 200px;
@@ -30,15 +34,20 @@ input[type="submit"]{
     margin-top: 28px;
     margin-left: 15px;
     color: var(--main-blue);
-    background-color:var(--main-color);
+    background-color:var(--main-bg-color);
 }
 input::placeholder{
     color: var(--main-blue);
+    font-size:24px;
 }
 #input_container{
     display:flex;
     flex-direction: column;
 }
 #err{
-    color: var(--err-color);
+    color: var(--err-color); 
+    width:400px;
+    font-size:25px;
+    text-align:center;
+    background-color: var(--second-bg);
 }

@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="general.css" rel="stylesheet" type="text/css">
+    <script src="script.js" charset="utf-8" > </script>
     <title>Historique</title>
 </head>
 
@@ -47,18 +49,18 @@
         $start_from = $page*$nb_elements;//pour afficher $nb_elements element si page = 0 on affiche de 0 ç $nb_elements si page 1 de 30 à 60...
 
         $t = $conn->query("SELECT * FROM historique ORDER BY id ASC limit {$start_from},".$nb_elements);//tout selection sur historique 
-        echo "<table> <tr><th scope='col'>id</th><th scope='col'>Etage</th><th scope='col'>Prix</th><th scope='col'>Position</th><th scope='col'>date</th></tr>";
+        echo "<table> <tr><th cscope='col' class='id up'>id</th><th class='etage up' scope='col'>Etage</th><th class='prix up' scope='col'>Prix</th><th class='pos up' scope='col'>Position</th><th class='date up' scope='col'>date</th><th></th></tr>";
         $i = 0;
         while ($histo = $t->fetch()) {
             echo "<tr>";
-            echo "<td>{$i}</td>";//Numero d'ampoule !=
+            echo "<td class='id'>{$i}&nbsp;&nbsp;</td>";//Numero d'ampoule !=
             $i++;
             $real_id = $histo['id'];
             echo "<form action='update.php' method='get'>
             <input type='hidden' name='id' value='" . $real_id . "'>
             <input type='hidden' name='page' value='" . $_GET["page"] . "'>
-            <td><input type='text' name='etage' value='" .$histo["etage"]. "'></td>
-            <td><input type='text' name='prix' value='" .$histo["prix"]. "'>€</td>
+            <td class='etage'><input type='number' name='etage' value='" .$histo["etage"]. "'>&nbsp;&nbsp;</td>
+            <td class='prix'><input type='number' name='prix' value='" .$histo["prix"]. "'><span class='money_sign'>€</span></td>
             <td>
             <select name='position' id='pos'>";
             switch ($histo["position"]){
@@ -81,13 +83,13 @@
             echo "</select>";
             echo "</td>";
             $date_val = explode(" ", $histo['date_amp'])[0];
-            echo "<td> <input type='date' name='date' value='{$date_val}'/></td>
-            <td><input type='submit' alt='update' value='Modifier' onclick='return confirm(`Êtes vous sûr de vouloir mettre à jour ?`)'></td>
+            echo "<td class='date'> <input type='date' name='date' value='{$date_val}'/></td>
+            <td class='submit'><input type='submit' class='btnx2' alt='update' value='Modifier' onclick='return confirm(`Êtes vous sûr de vouloir mettre à jour ?`)'>
             </form>
             <form action='delete.php' method='GET'>
             <input type='hidden' name='page' value='{$_GET['page']}'>
-            <input type='hidden' name='id' value='{$histo['id']}'>
-            <td><input type='submit' onclick='return confirm(`Êtes vous sûr de vouloir supprimer ?`)' value='Supprimer'/></td></form></tr>";
+            <input type='hidden' name='id' value='{$histo['id']}'><hr>
+            <input type='submit' class='btnx2' onclick='return confirm(`Êtes vous sûr de vouloir supprimer ?`)' value='Supprimer'/></td></form></tr>";
         }
         $t = $conn->query("SELECT COUNT(id) AS total FROM historique");
         $row = $t->fetch();
@@ -97,13 +99,13 @@
         $date = date('Y-m-d');
         echo "<hr> Ajouter un changement d'ampoule
             <table>
-            <tr><th scope='col'>id</th><th scope='col'>Etage</th><th scope='col'>Prix</th><th scope='col'>Position</th><th scope='col'>date</th></tr>
+            <tr><th scope='col' class='up'>id</th><th scope='col' class='up'>Etage</th><th scope='col' class='up'>Prix</th><th scope='col' class='up'>Position</th><th scope='col' class='up'>date</th><th></th></tr>
             <tr>
-            <td>{$i}</td>
+            <td>{$i}&nbsp;&nbsp;</td>
             <form action='add.php' method='get'>
                 <input type='hidden' name='page' value='{$page}'/>
-                <td><input type='text' placeholder='0' value='0' name='etage'/></td>
-                <td><input type='text' placeholder='5' value='5' name='prix'/>€</td>
+                <td><input type='number' placeholder='0' value='0' name='etage'/>&nbsp;&nbsp;</td>
+                <td><input type='number' placeholder='5' value='5' name='prix'/>€</td>
                 <td>
                     <select name='position' id='pos'>
                         <option value='0'>Coté Gauche</option>

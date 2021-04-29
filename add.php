@@ -1,11 +1,4 @@
 <?php
-    if(isset($_SESSION['user'])){
-        //echo '<meta http-equiv="refresh" content="durée;URL=adresse-de-destination">';
-       
-    }
-    else{
-       
-    }
 require("config.php");
 try
 {

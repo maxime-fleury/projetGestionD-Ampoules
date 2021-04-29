@@ -1,0 +1,96 @@
+:root{
+	--claire: #FFB300;
+	--mclaire: #FFD344;
+	--normal: #000;
+        --fonce: #101010;
+	--noire: #101010;
+}
+body{
+background: white;
+color:black;
+}
+table { 
+margin-left:10%;
+  width: 80%; 
+  border-collapse: collapse; 
+}
+/* Zebra striping */
+tr:nth-of-type(odd) { 
+  background: var(--mclaire); 
+}
+tr:nth-of-type(even) { 
+  background: var(--claire); 
+}
+th { 
+  background: var(--noire); 
+  color: white; 
+  font-weight: bold; 
+}
+td, th { 
+  padding: 6px; 
+  border: 1px solid var(--normal); 
+  text-align: center;
+}
+input[type=number]{
+  width: 2em;
+  text-align:right;
+}
+input,select{
+	background-color:var(--claire);
+	border:solid 1px var(--fonce);
+	color:white;
+}
+hr{
+	border:none;
+}
+input[type=submit]{
+	border:1px solid var(--fonce);
+	width:150px;
+}
+tr:nth-of-type(odd) input[type=submit]{ 
+  color:white;
+}
+@media screen and (max-width: 640px) {
+	.up{
+		display:none;
+	}
+	table, thead, tbody, th, td, tr { 
+		display: block; 
+	}
+	
+	/* Hide table headers (but not display: none;, for accessibility) */
+	thead tr { 
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+	}
+	
+	tr { border: 1px solid #ccc; }
+	
+	td { 
+		/* Behave  like a "row" */
+		border: none;
+		border-bottom: 1px solid #eee; 
+		position: relative;
+		padding-left: 50%; 
+	}
+	
+	td:before { 
+		/* Now like a table header */
+		position: absolute;
+		/* Top/left values mimic padding */
+		top: 6px;
+		left: 6px;
+		width: 45%; 
+		padding-right: 10px; 
+		white-space: nowrap;
+	}
+	td:nth-of-type(1):before { content: "ID"; text-align:center;}
+	td:nth-of-type(2):before { content: "Etage"; text-align:center;}
+	td:nth-of-type(3):before { content: "Prix"; text-align:center;}
+	td:nth-of-type(4):before { content: "Position"; text-align:center;}
+	td:nth-of-type(5):before { content: "Date"; text-align:center;}
+	.btnx2{
+		display:inline-block;
+	}
+}
