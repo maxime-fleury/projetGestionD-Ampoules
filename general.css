@@ -33,7 +33,7 @@ height:4em;
 	color:white;
 font-size:20px;
 }
-nav a{
+nav a,#previous,#next{
 margin-top:-10px;
 	color:white;
 background-color:var(--claire);
@@ -42,7 +42,7 @@ border:2px solid var(--fonce);
 	float:right;
 	padding:5px;
 }
-nav a:hover{
+nav a:hover,#previous:hover,#next:hover{
 	background-color:var(--fonce);
 border:2px solid var(--claire);
 }
@@ -105,12 +105,14 @@ tr:nth-of-type(odd) input, tr:nth-of-type(odd) select{
 }
 
 #next,#previous{
-  font-size:3em;
   float:right;
-  margin-right:25px
+  margin-right:50px;
+  margin-top:75px;
+  font-size:14px;
 }
 #previous{
 	 float:left;
+margin-left:50px;
 }
 #bienvenue{
   margin-left:50px;
