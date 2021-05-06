@@ -28,7 +28,7 @@ nav{
 	margin-top:-10px;
 	padding-top:10px;
 	width:100%;
-height:4em;
+height:6.1em;
 	background-color:var(--fonce);
 	color:white;
 font-size:20px;
@@ -106,13 +106,13 @@ tr:nth-of-type(odd) input, tr:nth-of-type(odd) select{
 
 #next,#previous{
   float:right;
-  margin-right:50px;
+  margin-right:25px;
   margin-top:75px;
   font-size:14px;
 }
 #previous{
 	 float:left;
-margin-left:50px;
+margin-left:25px;
 }
 #bienvenue{
   margin-left:50px;
@@ -126,6 +126,9 @@ strong{
 	.up{
 		display:none;
 	}
+#bienvenue,nav a{
+	margin-bottom:10px;
+}
 	input[type=submit],input[type=date],select, button{
 		width:125px;
 	}
