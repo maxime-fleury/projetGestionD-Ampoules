@@ -104,14 +104,14 @@
         echo "</table>";
         $date = date('Y-m-d');
         echo "<hr> <h1>{$lang[$_SESSION['lang']][37]}</h1>
-            <table>";
+            ";
             echo "<table> <tr><th cscope='col' class='id up'>id</th><th class='etage up' scope='col'>{$lang[$_SESSION['lang']][32]}</th><th class='prix up' scope='col'>{$lang[$_SESSION['lang']][33]}</th><th class='pos up' scope='col'>Position</th><th class='date up' scope='col'>Date</th><th></th></tr>";
             echo "<tr>
             <td>{$i}&nbsp;&nbsp;</td>
             <form action='add.php' method='get'>
                 <input type='hidden' name='page' value='{$page}'/>
                 <input type='hidden' name='sh' value='{$nb_elements}'/>
-                <td><input type='number' placeholder='0' value='0' name='{$lang[$_SESSION['lang']][32]}'/>&nbsp;&nbsp;</td>
+                <td><input type='number' placeholder='0' value='0' name='etage'/>&nbsp;&nbsp;</td>
                 <td><input type='number' placeholder='5' value='5' name='prix'/>€</td>
                 <td>
                     <select name='position' id='pos'>
