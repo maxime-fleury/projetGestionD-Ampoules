@@ -15,24 +15,28 @@
     <?php
    
     require("config.php");
-    $nb_elements = 20;//nombre d'elements à afficher
-    echo "<a href='client.php'>Gestion des Utilisateurs</a></nav>";
-    echo "<h1>Gestion des ampoules</h1>";
+
+    echo "<a href='client.php'>{$lang[$_SESSION['lang']][30]}</a></nav>";
+    echo "<h1>{$lang[$_SESSION['lang']][29]}</h1>";
 //////////////////////////////////////////TOASTBAR SUCCESS
     if(isset($_GET["delete"]) && $_GET["delete"] != "" ){//si err existe afficher les erreurs
         if($_GET["delete"]=="1")
-            echo "<div id='success'>La suppression s'est déroulée avec success !</div>";
+            echo "<div id='success'>{$lang[$_SESSION['lang']][31]} {$lang[$_SESSION['lang']][25]}</div>";
     }
     if(isset($_GET["add"]) && $_GET["add"] != "" ){//si err existe afficher les erreurs
         if($_GET["add"]=="1")
-            echo "<div id='success'>L'ajout s'est déroulée avec success !</div>";
+            echo "<div id='success'>{$lang[$_SESSION['lang']][31]} {$lang[$_SESSION['lang']][26]}</div>";
     }
     if(isset($_GET["update"]) && $_GET["update"] != "" ){//si err existe afficher les erreurs
         if($_GET["update"]=="1")
-            echo "<div id='success'>L'ajout s'est déroulée avec success !</div>";
+            echo "<div id='success'>{$lang[$_SESSION['lang']][31]} {$lang[$_SESSION['lang']][27]}</div>";
     }
 //////////////////////////////////////////////////
-    if(isset($_GET["page"]) && $_GET["page"] != "" ){//on teste la page dans tout les cas car on peut afficher la page ET faire d'autres actions !!
+    if(isset($_GET["page"]) && $_GET["page"] != "" ){
+        $page = $_GET["page"];
+        
+    }//on teste la page dans tout les cas car on peut afficher la page ET faire d'autres actions !!
+    else{ $page=0;}
         try
         {
             $conn = new PDO("mysql:host=$db_host;dbname=$db_name", $db_user, $db_pass);
@@ -42,11 +46,10 @@
         {
 
         }
-        $page = $_GET["page"];
         $start_from = $page*$nb_elements;//pour afficher $nb_elements element si page = 0 on affiche de 0 ç $nb_elements si page 1 de 30 à 60...
 
         $t = $conn->query("SELECT * FROM historique ORDER BY id ASC limit {$start_from},".$nb_elements);//tout selection sur historique 
-        echo "<table> <tr><th cscope='col' class='id up'>id</th><th class='etage up' scope='col'>Etage</th><th class='prix up' scope='col'>Prix</th><th class='pos up' scope='col'>Position</th><th class='date up' scope='col'>date</th><th></th></tr>";
+        echo "<table> <tr><th cscope='col' class='id up'>id</th><th class='etage up' scope='col'>{$lang[$_SESSION['lang']][32]}</th><th class='prix up' scope='col'>{$lang[$_SESSION['lang']][33]}</th><th class='pos up' scope='col'>Position</th><th class='date up' scope='col'>Date</th><th></th></tr>";
         $i = 0;
         while ($histo = $t->fetch()) {
             echo "<tr>";
@@ -55,75 +58,83 @@
             $real_id = $histo['id'];
             echo "<form action='update.php' method='get'>
             <input type='hidden' name='id' value='" . $real_id . "'>
-            <input type='hidden' name='page' value='" . $_GET["page"] . "'>
+            <input type='hidden' name='page' value='" . $page . "'>
             <td class='etage'><input type='number' name='etage' value='" .$histo["etage"]. "'>&nbsp;&nbsp;</td>
             <td class='prix'><input type='number' name='prix' value='" .$histo["prix"]. "'><span class='money_sign'>€</span></td>
             <td>
             <select name='position' id='pos'>";
             switch ($histo["position"]){
                 case 0:
-                    echo "<option value='0' selected='selected'>Coté Gauche</option>
-                <option value='1'>Coté Droit</option>
-                <option value='2'>Fond</option>";
+                    echo "<option value='0' selected='selected'>{$lang[$_SESSION['lang']][34]}</option>
+                <option value='1'>{$lang[$_SESSION['lang']][35]}</option>
+                <option value='2'>{$lang[$_SESSION['lang']][36]}</option>";
                 break;
                 case 1:
-                    echo "<option value='0'>Coté Gauche</option>
-                <option value='1' selected='selected'>Coté Droit</option>
-                <option value='2'>Fond</option>";
+                    echo "<option value='0'>{$lang[$_SESSION['lang']][34]}</option>
+                <option value='1' selected='selected'>{$lang[$_SESSION['lang']][35]}</option>
+                <option value='2'>{$lang[$_SESSION['lang']][36]}</option>";
                 break;
                 case 2: 
-                    echo "<option value='0' >Coté Gauche</option>
-                <option value='1'>Coté Droit</option>
-                <option value='2'selected='selected'>Fond</option>";
+                    echo "<option value='0' >{$lang[$_SESSION['lang']][34]}</option>
+                <option value='1'>{$lang[$_SESSION['lang']][35]}</option>
+                <option value='2'selected='selected'>{$lang[$_SESSION['lang']][36]}</option>";
                 break;
             }
             echo "</select>";
             echo "</td>";
             $date_val = explode(" ", $histo['date_amp'])[0];
             echo "<td class='date'> <input type='date' name='date' value='{$date_val}'/></td>
-            <td class='submit'><input type='submit' class='btnx2' alt='update' value='Modifier' onclick='return confirm(`Êtes vous sûr de vouloir mettre à jour ?`)'>
+            <td class='submit'><input type='submit' class='btnx2' alt='update' onclick='return confirm(`{$lang[$_SESSION['lang']][22]}`)' value='{$lang[$_SESSION['lang']][21]}'>
             </form>
             <form action='delete.php' method='GET'>
-            <input type='hidden' name='page' value='{$_GET['page']}'>
+            <input type='hidden' name='page' value='{$page}'>
             <input type='hidden' name='id' value='{$histo['id']}'><hr>
-            <input type='submit' class='btnx2' onclick='return confirm(`Êtes vous sûr de vouloir supprimer ?`)' value='Supprimer'/></td></form></tr>";
+            <input type='submit' class='btnx2' onclick='return confirm(`{$lang[$_SESSION['lang']][23]}`)' value='{$lang[$_SESSION['lang']][7]}'/></td></form></tr>";
         }
+
         $t = $conn->query("SELECT COUNT(id) AS total FROM historique");
         $row = $t->fetch();
         $total_pages = ceil($row["total"] / $nb_elements);
         $t->closeCursor(); 
+        echo "<div class='center'>";
+        echo "<form method='get' action='?'> " . $lang[$_SESSION['lang']][38];
+        echo ' : <input type="number" name="sh" value="'.$nb_elements.'"/>';
+        echo '<input type="submit" value="' . $lang[$_SESSION["lang"]][5] .'"/>';
+        echo '</form></div>';
         echo "</table>";
         $date = date('Y-m-d');
-        echo "<hr> <h1>Ajouter un changement d'ampoule</h1>
-            <table>
-            <tr><th scope='col' class='up'>id</th><th scope='col' class='up'>Etage</th><th scope='col' class='up'>Prix</th><th scope='col' class='up'>Position</th><th scope='col' class='up'>date</th><th></th></tr>
-            <tr>
+        echo "<hr> <h1>{$lang[$_SESSION['lang']][37]}</h1>
+            <table>";
+            echo "<table> <tr><th cscope='col' class='id up'>id</th><th class='etage up' scope='col'>{$lang[$_SESSION['lang']][32]}</th><th class='prix up' scope='col'>{$lang[$_SESSION['lang']][33]}</th><th class='pos up' scope='col'>Position</th><th class='date up' scope='col'>Date</th><th></th></tr>";
+            echo "<tr>
             <td>{$i}&nbsp;&nbsp;</td>
             <form action='add.php' method='get'>
                 <input type='hidden' name='page' value='{$page}'/>
-                <td><input type='number' placeholder='0' value='0' name='etage'/>&nbsp;&nbsp;</td>
+                <td><input type='number' placeholder='0' value='0' name='{$lang[$_SESSION['lang']][32]}'/>&nbsp;&nbsp;</td>
                 <td><input type='number' placeholder='5' value='5' name='prix'/>€</td>
                 <td>
                     <select name='position' id='pos'>
-                        <option value='0'>Coté Gauche</option>
-                        <option value='1'>Coté Droit</option>
-                        <option value='2'>Fond</option>
+                        <option value='0'>{$lang[$_SESSION['lang']][34]}</option>
+                        <option value='1'>{$lang[$_SESSION['lang']][35]}</option>
+                        <option value='2'>{$lang[$_SESSION['lang']][36]}</option>
                     </select>
                 </td>
                 <td>  <input type='date' name='date' value='{$date}'/></td>
-                <td><input type='submit' alt='Ajouter' value='Ajouter' onclick='return confirm(`Êtes vous sûr de vouloir ajouter ?`)'/></td>
+                <td><input type='submit' alt='{$lang[$_SESSION['lang']][6]}' value='{$lang[$_SESSION['lang']][6]}' onclick='return confirm(`{$lang[$_SESSION['lang']][24]}`)'/></td>
             </form>
                 </tr>
         </table>";
         $page_int = intval($page);
-
+        $sh = "";
+        if(isset($_GET["sh"]))
+            $sh = "&sh=".$_GET["sh"];
         if($page_int>0){
-            echo "<a href='histo.php?page=".($page_int-1)."'>Page précedente</a>";
+            echo "<a id='previous' href='histo.php?page=".($page_int-1).$sh."'>{$lang[$_SESSION['lang']][40]}</a>";
         }
 
         if($total_pages > ($page_int+1))//savoir si on peut afficher le boutton de page suivant comme des fois il n'ya pas de page suivante !
-            echo "<a href='histo.php?page=".($page_int+1)."'>Page suivante</a>";
-    }
+            echo "<a id='next' href='histo.php?page=".($page_int+1).$sh."'>{$lang[$_SESSION['lang']][39]}</a>";
+    
 
 ?>
 </body>

@@ -15,6 +15,11 @@ body{
 background: white;
 color:black;
 }
+.center{
+	display:flex;
+	justify-content:center;
+	margin-bottom:25px;
+}
 h1{
 	text-align:center;
 	font-size:24px;
@@ -97,6 +102,23 @@ input[type=submit]{
 }
 tr:nth-of-type(odd) input, tr:nth-of-type(odd) select{ 
   color:white;
+}
+
+#next,#previous{
+  font-size:3em;
+  float:right;
+  margin-right:25px
+}
+#previous{
+	 float:left;
+}
+#bienvenue{
+  margin-left:50px;
+  margin-top:22px;
+  font-size:1.1em;
+}
+strong{
+	color:var(--claire);
 }
 @media screen and (max-width: 750px) {
 	.up{
