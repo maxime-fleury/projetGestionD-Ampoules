@@ -110,6 +110,7 @@
             <td>{$i}&nbsp;&nbsp;</td>
             <form action='add.php' method='get'>
                 <input type='hidden' name='page' value='{$page}'/>
+                <input type='hidden' name='sh' value='{$nb_elements}'/>
                 <td><input type='number' placeholder='0' value='0' name='{$lang[$_SESSION['lang']][32]}'/>&nbsp;&nbsp;</td>
                 <td><input type='number' placeholder='5' value='5' name='prix'/>€</td>
                 <td>
