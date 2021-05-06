@@ -30,5 +30,5 @@ if(isset($_GET['id']) && $_GET['id'] != ""){
     }
     else echo "Erreur etage innexistant ou invalide <br>";
 }
-header('Location: histo.php?page=' . $_GET["page"] . '&update=1');//getParams si ya des erreur c'est gerré via checkParams dans config.php
+header('Location: histo.php?page=' . $_GET["page"] . '&update=1&sh='.$_GET['sh']);//getParams si ya des erreur c'est gerré via checkParams dans config.php
 exit();

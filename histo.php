@@ -59,6 +59,7 @@
             echo "<form action='update.php' method='get'>
             <input type='hidden' name='id' value='" . $real_id . "'>
             <input type='hidden' name='page' value='" . $page . "'>
+            <input type='hidden' name='sh' value='{$nb_elements}'/>
             <td class='etage'><input type='number' name='etage' value='" .$histo["etage"]. "'>&nbsp;&nbsp;</td>
             <td class='prix'><input type='number' name='prix' value='" .$histo["prix"]. "'><span class='money_sign'>€</span></td>
             <td>
@@ -87,9 +88,10 @@
             <td class='submit'><input type='submit' class='btnx2' alt='update' onclick='return confirm(`{$lang[$_SESSION['lang']][22]}`)' value='{$lang[$_SESSION['lang']][21]}'>
             </form>
             <form action='delete.php' method='GET'>
+            <input type='hidden' name='sh' value='{$nb_elements}'/>
             <input type='hidden' name='page' value='{$page}'>
             <input type='hidden' name='id' value='{$histo['id']}'><hr>
-            <input type='submit' class='btnx2' onclick='return confirm(`{$lang[$_SESSION['lang']][23]}`)' value='{$lang[$_SESSION['lang']][7]}'/></td></form></tr>";
+            <input type='submit' class='btnx2' onclick='return confirm(`{$lang[$_SESSION['lang']][23]}`)' value='{$lang[$_SESSION['lang']][7]}'/></td></form></tr></form>";
         }
 
         $t = $conn->query("SELECT COUNT(id) AS total FROM historique");
